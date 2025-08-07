@@ -9,7 +9,7 @@ const ExerciseGoal = sequelize.define(
       primaryKey: true,
     },
     exercise_id: {
-      type: DataTypes.UUID,
+      type: DataTypes.BIGINT,
       primaryKey: true,
     },
   },

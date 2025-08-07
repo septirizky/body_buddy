@@ -76,20 +76,66 @@ export const updateUser = async (req, res) => {
     const { id } = req.params;
     const updatedData = req.body;
 
-    const user = await User.findByPk(id);
+    let user = await User.findByPk(id);
+
+    // If user doesn't exist, create a new one (for signup process)
     if (!user) {
-      return res.status(404).json({
-        status: "404",
-        message: "User not found",
+      console.log(`User ${id} not found, creating new user...`);
+      user = await User.create({
+        id: id,
+        birthday: updatedData.birthday,
+        gender: updatedData.gender,
+        weight: updatedData.weight,
+        weight_unit: updatedData.weight_unit,
+        picture: updatedData.picture,
+      });
+
+      // Create default user settings if provided
+      if (updatedData.settings) {
+        await UserSettings.create({
+          user_id: id,
+          intensity_id:
+            updatedData.settings.intensity_id ||
+            "00000000-0000-0000-0000-000000000001",
+          goal_id:
+            updatedData.settings.goal_id ||
+            "00000000-0000-0000-0000-000000000001",
+        });
+      }
+
+      // Create default user progress
+      await UserProgress.create({
+        user_id: id,
+        level: 1,
+        level_progress: 0,
+        streak: 0,
+        highest_streak: 0,
+      });
+
+      // Create user schedule if provided
+      if (updatedData.schedule && Array.isArray(updatedData.schedule)) {
+        const scheduleData = updatedData.schedule.map((day) => ({
+          user_id: id,
+          day: day,
+          active: true,
+        }));
+        await UserSchedule.bulkCreate(scheduleData);
+      }
+
+      res.status(201).json({
+        status: "201",
+        message: "User created successfully",
+        data: user,
+      });
+    } else {
+      // User exists, update normally
+      await user.update(updatedData);
+      res.status(200).json({
+        status: "200",
+        message: "User updated successfully",
+        data: user,
       });
     }
-
-    await user.update(updatedData);
-    res.status(200).json({
-      status: "200",
-      message: "User updated successfully",
-      data: user,
-    });
   } catch (error) {
     console.error(error);
     res.status(500).json({

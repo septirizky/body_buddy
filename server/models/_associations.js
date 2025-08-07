@@ -22,7 +22,7 @@ UserProgress.belongsTo(User, {
 User.hasMany(UserSchedule, {
   foreignKey: "user_id",
 });
-UserSchedule.hasOne(User, {
+UserSchedule.belongsTo(User, {
   foreignKey: "user_id",
 });
 

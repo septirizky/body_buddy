@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 8080;
 const allowedOrigins = [
   "http://localhost:3000",
   "https://bodybuddy-umber.vercel.app",
-  "https://www.bodybuddy.me"
+  "https://www.bodybuddy.me",
 ];
 
 // Create Express application

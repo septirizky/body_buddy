@@ -6,9 +6,9 @@ const Program = sequelize.define(
   {
     id: {
       type: DataTypes.UUID,
-      allowNull: true,
+      allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     created_at: {
       type: DataTypes.DATE,

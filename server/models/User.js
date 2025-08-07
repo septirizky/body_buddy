@@ -19,7 +19,7 @@ const User = sequelize.define(
       allowNull: true,
     },
     weight: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.DECIMAL(5, 2), // Allows up to 999.99 kg
       allowNull: true,
     },
     weight_unit: {

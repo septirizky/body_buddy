@@ -8,14 +8,14 @@ const RoutineExercise = sequelize.define(
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
+      defaultValue: DataTypes.UUIDV4,
     },
     routine_id: {
       type: DataTypes.UUID,
       allowNull: false,
     },
     exercise_id: {
-      type: DataTypes.UUID,
+      type: DataTypes.BIGINT,
       allowNull: false,
     },
     order: {

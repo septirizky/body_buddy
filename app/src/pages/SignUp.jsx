@@ -120,12 +120,8 @@ export const SignUp = (props) => {
               Sign Up
             </Typography>
 
-            <Box sx={{ width: {xs: "60%", sm: "40%"}, margin: "0 auto" }}>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSignUp}
-              >
+            <Box sx={{ width: { xs: "60%", sm: "40%" }, margin: "0 auto" }}>
+              <Box component="form" noValidate onSubmit={handleSignUp}>
                 <TextField
                   variant="outlined"
                   margin="normal"

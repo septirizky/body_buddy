@@ -97,7 +97,7 @@ export const SignIn = (props) => {
               Sign In
             </Typography>
 
-            <Box sx={{ width: {xs: "60%", sm: "50%"}, margin: "0 auto" }}>
+            <Box sx={{ width: { xs: "60%", sm: "50%" }, margin: "0 auto" }}>
               {/* Email & Password Sign In Form */}
               <Box
                 component="form"
